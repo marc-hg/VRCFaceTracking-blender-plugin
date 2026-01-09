@@ -346,6 +346,13 @@ class VRCFT_OT_CreateShapeKeys(Operator):
 
             for x in range(len(VRCFT_Labels)):
                 curr_key = eval("scene.vrcft_shapekeys_" + str(x))
+
+                if not curr_key:
+                    continue
+
+                if curr_key != "Basis" and curr_key not in object.data.shape_keys.key_blocks:
+                    print("VRCFT: Shape key '" + curr_key + "' not found. Skipping.")
+                    continue
                 
                 #Check if blend with 'Basis' shape key
                 if curr_key == "Basis":
