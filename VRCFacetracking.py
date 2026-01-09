@@ -438,7 +438,7 @@ class VRCFT_UL(Panel):
                 row = col.row(align=True)
                 row.scale_y = 1.1
                 row.label(text = VRCFT_Labels[i] + ":")
-                row.prop(scene, 'vrcft_shapekeys_' + str(i), icon='SHAPEKEY_DATA')                 
+                row.prop_search(scene, 'vrcft_shapekeys_' + str(i), mesh.data.shape_keys, "key_blocks", text="", icon='SHAPEKEY_DATA')                 
             row = layout.row()
             row.operator("vrcft.create_shapekeys", icon='MESH_MONKEY')
         else:
@@ -464,7 +464,7 @@ def register():
     Scene.vrcft_mesh = EnumProperty(name='Mesh',description='Mesh to apply VRCFT shape keys',items=get_meshes)
     # Shape Keys
     for i, vrcft_shape in enumerate(VRCFT_Labels):
-        setattr(Scene, "vrcft_shapekeys_" + str(i), EnumProperty(name='',description='Select shapekey to use for VRCFT',items=get_shapekeys_vrcft))
+        setattr(Scene, "vrcft_shapekeys_" + str(i), StringProperty(name='',description='Select shapekey to use for VRCFT'))
 
 def unregister():
     for cls in classes:
